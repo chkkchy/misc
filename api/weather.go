@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-const urlFmt = "http://weather.livedoor.com/forecast/webservice/json/v1?city=%s" // e.g. 100040
+const urlFmt = "http://weather.livedoor.com/forecast/webservice/json/v1?city=%s" // e.g. 140010
 
 type res struct {
 	PinpointLocations []struct {
@@ -65,9 +65,9 @@ type res struct {
 
 // Weather gets weather info
 func Weather(c echo.Context) error {
-	param := c.Param("id")
+	id := c.Param("id")
 
-	url := fmt.Sprintf(urlFmt, param)
+	url := fmt.Sprintf(urlFmt, id)
 	req, _ := http.NewRequest("GET", url, nil)
 	client := &http.Client{
 		Timeout: 5 * time.Second,
